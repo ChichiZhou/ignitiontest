@@ -1,10 +1,8 @@
 package com.hezho.makework;
 
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import com.inductiveautomation.ignition.common.BundleUtil;
 import com.inductiveautomation.ignition.common.licensing.LicenseState;
@@ -12,20 +10,15 @@ import com.inductiveautomation.ignition.common.util.LogUtil;
 import com.inductiveautomation.ignition.common.util.LoggerEx;
 import com.hezho.makework.records.HCSettingsRecord;
 import com.hezho.makework.web.HCSettingsPage;
-import com.inductiveautomation.ignition.gateway.dataroutes.RouteGroup;
 import com.inductiveautomation.ignition.gateway.localdb.persistence.IRecordListener;
 import com.inductiveautomation.ignition.gateway.model.AbstractGatewayModuleHook;
 import com.inductiveautomation.ignition.gateway.model.GatewayContext;
-import com.inductiveautomation.ignition.gateway.web.components.AbstractNamedTab;
 import com.inductiveautomation.ignition.gateway.web.components.ConfigPanel;
 import com.inductiveautomation.ignition.gateway.web.models.ConfigCategory;
 import com.inductiveautomation.ignition.gateway.web.models.DefaultConfigTab;
 import com.inductiveautomation.ignition.gateway.web.models.IConfigTab;
-import com.inductiveautomation.ignition.gateway.web.models.INamedTab;
 import com.inductiveautomation.ignition.gateway.web.models.KeyValue;
-import com.inductiveautomation.ignition.gateway.web.pages.BasicReactPanel;
-import com.inductiveautomation.ignition.gateway.web.pages.status.StatusCategories;
-import org.apache.wicket.markup.html.WebMarkupContainer;
+
 
 /**
  * Filename: GatewayHook.java
@@ -48,22 +41,7 @@ public class GatewayHook extends AbstractGatewayModuleHook {
      * HomeConnectStatusRoutes.java, and the model and view will be in our javascript folder. The status panel is optional
      * Only add if your module will provide meaningful info.
      */
-//    private static final INamedTab HCE_STATUS_PAGE = new AbstractNamedTab(
-//            "homeconnect",
-//            StatusCategories.SYSTEMS,
-//            "HomeConnect.nav.status.header") {
-//
-//        @Override
-//        public WebMarkupContainer getPanel(String panelId) {
-//            // We've set  GatewayHook.getMountPathAlias() to return hce, so we need to use that alias here.
-//            return new BasicReactPanel(panelId, "/main/res/hce/js/homeconnectstatus.js", "homeconnectstatus");
-//        }
-//
-//        @Override
-//        public Iterable<String> getSearchTerms(){
-//            return Arrays.asList("home connect", "hce");
-//        }
-//    };
+
 
     /**
      * This sets up the config panel
@@ -164,10 +142,6 @@ public class GatewayHook extends AbstractGatewayModuleHook {
             settingsRecord.setHCDeviceCount(15);
             settingsRecord.setBroadcastSSID(false);
 
-            /*
-             * This doesn't override existing settings, only replaces it with these if we didn't
-             * exist already.
-             */
             context.getSchemaUpdater().ensureRecordExists(settingsRecord);
         } catch (Exception e) {
             log.error("Failed to establish HCSettings Record exists", e);
@@ -191,24 +165,5 @@ public class GatewayHook extends AbstractGatewayModuleHook {
     /**
      * The following methods are used by the status panel. Only add these if you are providing a status panel.
      */
-
-
-    // getMountPathAlias() allows us to use a shorter mount path. Use caution, because we don't want a conflict with
-    // other modules by other authors.
-//    @Override
-//    public Optional<String> getMountPathAlias() {
-//        return Optional.of("hce");
-//    }
-//
-//    // Use this whenever you have mounted resources
-//    @Override
-//    public Optional<String> getMountedResourceFolder() {
-//        return Optional.of("mounted");
-//    }
-
-//    @Override
-//    public List<? extends INamedTab> getStatusPanels() {
-//        return Collections.singletonList(HCE_STATUS_PAGE);
-//    }
 }
 
