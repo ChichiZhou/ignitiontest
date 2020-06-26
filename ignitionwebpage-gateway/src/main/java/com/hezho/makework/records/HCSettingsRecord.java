@@ -12,7 +12,7 @@ import simpleorm.dataset.SFieldFlags;
 public class HCSettingsRecord extends PersistentRecord {
 
     public static final RecordMeta<HCSettingsRecord> META = new RecordMeta<HCSettingsRecord>(
-            HCSettingsRecord.class, "HCSettingsRecord").setNounKey("HCSettingsRecord.Noun").setNounPluralKey(
+            HCSettingsRecord.class, "HCSettingsRecordT1").setNounKey("HCSettingsRecord.Noun").setNounPluralKey(
             "HCSettingsRecord.Noun.Plural");
 
     public static final IdentityField Id = new IdentityField(META);

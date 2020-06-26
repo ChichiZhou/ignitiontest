@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
+import com.hezho.makework.manager.HCSettingManager;
+import com.hezho.makework.manager.RecordManager;
 import com.inductiveautomation.ignition.common.BundleUtil;
 import com.inductiveautomation.ignition.common.licensing.LicenseState;
 import com.inductiveautomation.ignition.common.util.LogUtil;
@@ -11,6 +13,7 @@ import com.inductiveautomation.ignition.common.util.LoggerEx;
 import com.hezho.makework.records.HCSettingsRecord;
 import com.hezho.makework.web.HCSettingsPage;
 import com.inductiveautomation.ignition.gateway.localdb.persistence.IRecordListener;
+import com.inductiveautomation.ignition.gateway.localdb.persistence.PersistenceInterface;
 import com.inductiveautomation.ignition.gateway.model.AbstractGatewayModuleHook;
 import com.inductiveautomation.ignition.gateway.model.GatewayContext;
 import com.inductiveautomation.ignition.gateway.web.components.ConfigPanel;
@@ -98,26 +101,35 @@ public class GatewayHook extends AbstractGatewayModuleHook {
 
         // get the settings record and do something with it...
         HCSettingsRecord theOneRecord = context.getLocalPersistenceInterface().find(HCSettingsRecord.META, 0L);
+
+//        PersistenceInterface persistenceInterface = context.getLocalPersistenceInterface();
+//        HCSettingManager hcSettingManager = new HCSettingManager(new RecordManager(persistenceInterface));
+
         log.info("Hub name: " + theOneRecord.getHCHubName());
         log.info("IP address: " + theOneRecord.getHCIPAddress());
 
         // listen for updates to the settings record...
-        HCSettingsRecord.META.addRecordListener(new IRecordListener<HCSettingsRecord>() {
-            @Override
-            public void recordUpdated(HCSettingsRecord hcSettingsRecord) {
-                log.info("recordUpdated()");
-            }
 
-            @Override
-            public void recordAdded(HCSettingsRecord hcSettingsRecord) {
-                log.info("recordAdded()");
-            }
+//        HCSettingsRecord.META.addRecordListener(new IRecordListener<HCSettingsRecord>() {
+//            @Override
+//            public void recordUpdated(HCSettingsRecord hcSettingsRecord) {
+//                log.info("recordUpdated()");
+//            }
+//
+//            @Override
+//            public void recordAdded(HCSettingsRecord hcSettingsRecord) {
+//                log.info("recordAdded()");
+//            }
+//
+//            @Override
+//            public void recordDeleted(KeyValue keyValue) {
+//                log.info("recordDeleted()");
+//            }
+//        });
+        // 把这个部分逻辑另外放在一个别的 class 中
+        HCSettingManager hcSettingManager = new HCSettingManager();
+        HCSettingsRecord.META.addRecordListener(hcSettingManager);
 
-            @Override
-            public void recordDeleted(KeyValue keyValue) {
-                log.info("recordDeleted()");
-            }
-        });
 
 
         log.debug("Setup Complete.");
