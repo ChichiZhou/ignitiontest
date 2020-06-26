@@ -79,8 +79,6 @@ public class GatewayHook extends AbstractGatewayModuleHook {
      * We'll add an overview contributor. This is optional -- only add if your module will provide meaningful info.
      */
 
-
-
     @Override
     public void setup(GatewayContext gatewayContext) {
         this.context = gatewayContext;
@@ -88,7 +86,14 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         log.debug("Beginning setup of HomeConnect Module");
 
         // Register GatewayHook.properties by registering the GatewayHook.class with BundleUtils
+        // 在这使用 BundleConstant ?????
         BundleUtil.get().addBundle("HomeConnect", getClass(), "HomeConnect");
+        /**
+         * 即使不把这个 HCSettingsRecord.properties 放在 record 下面，也可以用这种方法来显式包含 properity
+         * 或者把 HCSettingsRecord.properties 放在相对应文件夹下
+         * 但是必须是放在 resources 这个路径下
+         */
+        //BundleUtil.get().addBundle("HCSettingsRecord", HCSettingsRecord.class.getClassLoader(), "com/hezho/makework/HCSettingsRecord");
 
         //Verify tables for persistent records if necessary
         verifySchema(context);

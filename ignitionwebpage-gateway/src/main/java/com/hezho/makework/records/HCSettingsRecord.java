@@ -12,8 +12,7 @@ import simpleorm.dataset.SFieldFlags;
 public class HCSettingsRecord extends PersistentRecord {
 
     public static final RecordMeta<HCSettingsRecord> META = new RecordMeta<HCSettingsRecord>(
-            HCSettingsRecord.class, "HCSettingsRecord").setNounKey("HCSettingsRecord.Noun").setNounPluralKey(
-            "HCSettingsRecord.Noun.Plural");
+            HCSettingsRecord.class, "HCSettingsRecord");
 
     public static final IdentityField Id = new IdentityField(META);
 
@@ -29,7 +28,7 @@ public class HCSettingsRecord extends PersistentRecord {
     // ordering through integer ranking
     static final Category HubConfiguration = new Category("HCSettingsRecord.Category.Configuration", 1000).include(HCHubName, HCIPAddress);
     static final Category Security = new Category("HCSettingsRecord.Category.Security", 1001).include(BroadcastSSID, HCDeviceCount, AllowInterop);
-    static final Category Power = new Category("HCSettingsRecord.Category.Power", 1001).include(HCPowerOutput);
+    static final Category Power = new Category("HCSettingsRecord.Category.Power", 1002).include(HCPowerOutput);
 
 
 
