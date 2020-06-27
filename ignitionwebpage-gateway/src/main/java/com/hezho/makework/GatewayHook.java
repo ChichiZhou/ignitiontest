@@ -102,13 +102,13 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         maybeCreateHCSettings(context);
 
         // get the settings record and do something with it...
-        HCSettingsRecord theOneRecord = context.getLocalPersistenceInterface().find(HCSettingsRecord.META, 0L);
+        //HCSettingsRecord theOneRecord = context.getLocalPersistenceInterface().find(HCSettingsRecord.META, 0L);
 
-        PersistenceInterface persistenceInterface = context.getLocalPersistenceInterface();
+        PersistenceInterface persistenceInterface = context.getPersistenceInterface(); // use getPersistenceInterface here
         HCSettingManager hcSettingManager = new HCSettingManager(new RecordManager(persistenceInterface));
 
-        log.info("Hub name: " + theOneRecord.getHCHubName());
-        log.info("IP address: " + theOneRecord.getHCIPAddress());
+//        log.info("Hub name: " + theOneRecord.getHCHubName());
+//        log.info("IP address: " + theOneRecord.getHCIPAddress());
 
         // listen for updates to the settings record...
 
@@ -130,8 +130,9 @@ public class GatewayHook extends AbstractGatewayModuleHook {
 //        });
         // 把这个部分逻辑另外放在一个别的 class 中
 //        HCSettingManager hcSettingManager = new HCSettingManager();
-        HCSettingsRecord.META.addRecordListener(hcSettingManager);
 
+        // 这个 addRecordListener 必须在这
+        HCSettingsRecord.META.addRecordListener(hcSettingManager);
 
         log.debug("Setup Complete.");
     }

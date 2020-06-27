@@ -33,8 +33,9 @@ public class HCSettingsRecord extends PersistentRecord {
 
 
     // accessors for our record entries
-    public void setAllowInterop(Boolean allow) {
+    public HCSettingsRecord setAllowInterop(Boolean allow) {
         setBoolean(AllowInterop, allow);
+        return this;
     }
     public boolean getAllowInterop() {
         return getBoolean(AllowInterop);
@@ -48,31 +49,35 @@ public class HCSettingsRecord extends PersistentRecord {
         return getLong(Id);
     }
 
-    public void setBroadcastSSID(Boolean broadcast){
+    public HCSettingsRecord setBroadcastSSID(Boolean broadcast){
         setBoolean(BroadcastSSID, broadcast);
+        return this;
     }
 
     public boolean getBroadcastSSID() {
         return getBoolean(BroadcastSSID);
     }
 
-    public void setHCDeviceCount(Integer count) {
+    public HCSettingsRecord setHCDeviceCount(Integer count) {
         setInt(HCDeviceCount, count);
+        return this;
     }
     public Integer getHCDeviceCount() {
         return getInt(HCDeviceCount);
     }
 
-    public void setHCHubName(String name) {
+    public HCSettingsRecord setHCHubName(String name) {
         setString(HCHubName, name);
+        return this;
     }
 
     public String getHCHubName() {
         return getString(HCHubName);
     }
 
-    public void setHCIPAddress(String ip){
+    public HCSettingsRecord setHCIPAddress(String ip){
         setString(HCIPAddress, ip);
+        return this;
     }
 
     public String getHCIPAddress() {
@@ -83,8 +88,9 @@ public class HCSettingsRecord extends PersistentRecord {
         return getInt(HCPowerOutput);
     }
 
-    public void setHCPowerOutput(Integer power){
+    public HCSettingsRecord setHCPowerOutput(Integer power){
         setInt(HCPowerOutput, power);
+        return this;
     }
 
     @Override
