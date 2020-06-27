@@ -8,9 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class HCSettingManager implements IRecordListener<HCSettingsRecord> {
-    //@NonNull private final RecordManager recordManager;
+    @NonNull private final RecordManager recordManager;
 
     @Override
     public void recordUpdated(HCSettingsRecord hcSettingsRecord) {

@@ -12,10 +12,9 @@ import simpleorm.dataset.SFieldFlags;
 public class HCSettingsRecord extends PersistentRecord {
 
     public static final RecordMeta<HCSettingsRecord> META = new RecordMeta<HCSettingsRecord>(
-            HCSettingsRecord.class, "HCSettingsRecordT1").setNounKey("HCSettingsRecord.Noun").setNounPluralKey(
-            "HCSettingsRecord.Noun.Plural");
+            HCSettingsRecord.class, "HCSettingsRecord");
 
-    public static final IdentityField Id = new IdentityField(META);
+    public static final IdentityField Id = new IdentityField(META);  // 这个应该是 primary key
 
     //Hub Settings -- for our imaginary IoT controller device
     public static final StringField HCHubName = new StringField(META, "HomeConnectHubName", SFieldFlags.SMANDATORY);
@@ -24,10 +23,10 @@ public class HCSettingsRecord extends PersistentRecord {
     public static final StringField HCIPAddress = new StringField(META, "IPAddress", SFieldFlags.SMANDATORY);
     public static final BooleanField AllowInterop = new BooleanField(META, "AllowInterop").setDefault(true);
     public static final IntField HCPowerOutput = new IntField(META, "PowerOutput", SFieldFlags.SMANDATORY).setDefault(23);
-
+    public static final StringField IamNew = new StringField(META, "IamNew").setDefault("HELLO THERE, I AM NEW!");
     // create categories for our record entries, getting titles from the HCSettingsRecord.properties, and
     // ordering through integer ranking
-    static final Category HubConfiguration = new Category("HCSettingsRecord.Category.Configuration", 1000).include(HCHubName, HCIPAddress);
+    static final Category HubConfiguration = new Category("HCSettingsRecord.Category.Configuration", 1000).include(HCHubName, HCIPAddress, IamNew);
     static final Category Security = new Category("HCSettingsRecord.Category.Security", 1001).include(BroadcastSSID, HCDeviceCount, AllowInterop);
     static final Category Power = new Category("HCSettingsRecord.Category.Power", 1001).include(HCPowerOutput);
 

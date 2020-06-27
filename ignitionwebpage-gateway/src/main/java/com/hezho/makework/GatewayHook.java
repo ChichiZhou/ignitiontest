@@ -96,14 +96,16 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         //Verify tables for persistent records if necessary
         verifySchema(context);
 
+
+
         // create records if needed
         maybeCreateHCSettings(context);
 
         // get the settings record and do something with it...
         HCSettingsRecord theOneRecord = context.getLocalPersistenceInterface().find(HCSettingsRecord.META, 0L);
 
-//        PersistenceInterface persistenceInterface = context.getLocalPersistenceInterface();
-//        HCSettingManager hcSettingManager = new HCSettingManager(new RecordManager(persistenceInterface));
+        PersistenceInterface persistenceInterface = context.getLocalPersistenceInterface();
+        HCSettingManager hcSettingManager = new HCSettingManager(new RecordManager(persistenceInterface));
 
         log.info("Hub name: " + theOneRecord.getHCHubName());
         log.info("IP address: " + theOneRecord.getHCIPAddress());
@@ -127,9 +129,8 @@ public class GatewayHook extends AbstractGatewayModuleHook {
 //            }
 //        });
         // 把这个部分逻辑另外放在一个别的 class 中
-        HCSettingManager hcSettingManager = new HCSettingManager();
+//        HCSettingManager hcSettingManager = new HCSettingManager();
         HCSettingsRecord.META.addRecordListener(hcSettingManager);
-
 
 
         log.debug("Setup Complete.");
