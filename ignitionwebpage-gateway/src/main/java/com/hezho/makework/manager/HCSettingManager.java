@@ -43,8 +43,8 @@ public class HCSettingManager implements IRecordListener<HCSettingsRecord> {
                         record.setBroadcastSSID(hcSettingsRecord.getBroadcastSSID())
                             .setAllowInterop(hcSettingsRecord.getAllowInterop())
                             .setHCDeviceCount(hcSettingsRecord.getHCDeviceCount())
-                            .setHCHubName("NEW CREATED")
-                            .setHCIPAddress("NEW CREATED IP")
+                            .setHCHubName(hcSettingsRecord.getHCHubName())
+                            .setHCIPAddress(hcSettingsRecord.getHCIPAddress())
                             .setHCPowerOutput(hcSettingsRecord.getHCPowerOutput())
 
         );
