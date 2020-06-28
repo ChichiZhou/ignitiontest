@@ -18,9 +18,9 @@ public class HCSettingManager implements IRecordListener<HCSettingsRecord> {
 //        recordManager.update(
 //                recordManager.getOnlyRecord(HCSettingsRecord.META)
 //        );
-        //createRecords(hcSettingsRecord);
-        updateRecords(hcSettingsRecord);
-
+        createRecords(hcSettingsRecord);
+        //updateRecords(hcSettingsRecord);
+        //onlyUpdate(hcSettingsRecord);
 
     }
 
@@ -34,7 +34,7 @@ public class HCSettingManager implements IRecordListener<HCSettingsRecord> {
         log.info("recordDeleted()");
     }
 
-    // 不知道为什么，这个会持续更新 Id 是 0 的那个数据
+    // 不知道为什么，这个会持续更新初始化创建的数据
     public void createRecords(@NonNull HCSettingsRecord hcSettingsRecord){
         log.debug("HELLO THERE, JUN 27 !");
         recordManager.createNewAndSave(
@@ -43,17 +43,23 @@ public class HCSettingManager implements IRecordListener<HCSettingsRecord> {
                         record.setBroadcastSSID(hcSettingsRecord.getBroadcastSSID())
                             .setAllowInterop(hcSettingsRecord.getAllowInterop())
                             .setHCDeviceCount(hcSettingsRecord.getHCDeviceCount())
-                            .setHCHubName(hcSettingsRecord.getHCHubName())
-                            .setHCIPAddress(hcSettingsRecord.getHCIPAddress())
+                            .setHCHubName("NEW CREATED")
+                            .setHCIPAddress("NEW CREATED IP")
                             .setHCPowerOutput(hcSettingsRecord.getHCPowerOutput())
 
         );
     }
 
-
     public void updateRecords(@NonNull HCSettingsRecord hcSettingsRecord){
         log.debug("HELLO THERE, JUN 27 !");
         recordManager.updateWithoutNotify(hcSettingsRecord);
+    }
+
+    // 这个会出现死循环
+    // 因为会不断 notify 不断更新
+    public void onlyUpdate(@NonNull HCSettingsRecord hcSettingsRecord){
+        log.debug("HELLO THERE, JUN 27 !");
+        recordManager.update(hcSettingsRecord);
     }
 
 }

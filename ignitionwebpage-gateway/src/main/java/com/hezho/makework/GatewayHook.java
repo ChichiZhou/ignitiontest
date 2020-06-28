@@ -96,9 +96,8 @@ public class GatewayHook extends AbstractGatewayModuleHook {
         //Verify tables for persistent records if necessary
         verifySchema(context);
 
-
-
-        // create records if needed
+        // 如果没有，则会报错。
+        // 原因是在 HCSettingRecord 里面，需要一个 record
         maybeCreateHCSettings(context);
 
         // get the settings record and do something with it...
@@ -132,6 +131,7 @@ public class GatewayHook extends AbstractGatewayModuleHook {
 //        HCSettingManager hcSettingManager = new HCSettingManager();
 
         // 这个 addRecordListener 必须在这
+        // 其作用是给 HCSettingsRecord 添加一个 listener
         HCSettingsRecord.META.addRecordListener(hcSettingManager);
 
         log.debug("Setup Complete.");
