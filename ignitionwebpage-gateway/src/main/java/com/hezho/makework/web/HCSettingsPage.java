@@ -17,6 +17,14 @@ import org.apache.wicket.Application;
  *
  * HCSettings extends  {@link RecordEditForm} to provide a page where we can edit records in our PersistentRecord.
  */
+
+
+/**
+ * A Wicket panel that provides web-form editing capability for persistent record objects.
+ * Can edit more than one record at once, flattening them and combining their field categories to make them look like a single object.
+ * In this way extension object parent records and their type-specific properties records can be edited as a whole.
+ */
+
 public class HCSettingsPage extends RecordEditForm {
     public static final Pair<String, String> MENU_LOCATION =
         Pair.of(GatewayHook.CONFIG_CATEGORY.getName(), "homeconnect");
